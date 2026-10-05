@@ -35,9 +35,15 @@ const PORT = process.env.PORT || 5000;
 const startServer = async () => {
   await connectDB();
 
-  app.listen(PORT, () => {
-    console.log(`3. Server running on http://localhost:${PORT}`);
-  });
+  if (process.env.VERCEL !== "1") {
+    app.listen(PORT, () => {
+      console.log(
+        `3. Server running on http://localhost:${PORT}`
+      );
+    });
+  }
 };
 
 startServer();
+
+module.exports = app;
